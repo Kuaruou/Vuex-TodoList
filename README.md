@@ -1,3 +1,3 @@
-# todoList
+# TodoList
 
-### [[連結]](https://kuaruou.github.io/todoList/) ###
+### [[網站連結]](https://kuaruou.github.io/Vue-TodoList/) ###
