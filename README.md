@@ -1,5 +1,5 @@
 # todolist-vue-cli
-https://kuaruou.github.io/Vue-TodoList/
+kuaruou.github.io/Vue-TodoList/
 
 ## Project setup
 ```
