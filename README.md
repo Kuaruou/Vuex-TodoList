@@ -1,4 +1,4 @@
-# todolist-vue-cli-1108
+# todolist-vue-cli
 
 ## Project setup
 ```
