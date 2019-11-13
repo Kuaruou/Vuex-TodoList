@@ -1,7 +1,5 @@
 # todolist-vue-cli
 
-# Demo
-
 ![image](https://github.com/Kuaruou/Vue-TodoList/blob/master/TodoList.gif)
 
 ## Project setup
