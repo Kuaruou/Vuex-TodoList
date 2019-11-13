@@ -66,6 +66,7 @@
                   class="form-check-input"
                   v-model="item.completed"
                   :id="item.id"
+                  @change="saveList()"
                 />
                 <label
                   class="form-check-label"
@@ -105,18 +106,13 @@
         </div>
       </div>
     </div>
-
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>-->
   </div>
 </template>
 
 <script>
 import VueSweetalert2 from "vue-sweetalert2";
 import swal from "sweetalert2/dist/sweetalert2.all.min.js";
+import storage from "./model/storage.js";
 
 export default {
   // el: '#app',
@@ -155,6 +151,7 @@ export default {
         completed: false
       });
       this.newTodo = "";
+      storage.set("todoList", this.todoList);
     },
     removeTodo: function(todo) {
       const vm = this;
@@ -162,7 +159,11 @@ export default {
         return todo.id === item.id;
       });
       this.todoList.splice(newIndex, 1);
+      storage.set("todoList", this.todoList);
     },
+    saveList: function(){
+      storage.set("todoList", this.todoList);
+    },//在checkbox切換時亦可以寫入localstorage
     editTodo: function(item) {
       console.log(item);
       this.cacheTodo = item;
@@ -175,6 +176,7 @@ export default {
       item.title = this.cacheTitle;
       this.cacheTitle = "";
       this.cacheTodo = {};
+      storage.set("todoList", this.todoList);
     },
     clearAll: function() {
       const vm = this;
@@ -190,7 +192,7 @@ export default {
       }).then(result => {
         if (result.value) {
           swal.fire("已刪除!", "所有紀錄已清除。", "success");
-          vm.todoList = [];
+          vm.todoList = []; 
         } else if (
           /* Read more about handling dismissals below */
           result.dismiss === swal.DismissReason.cancel
@@ -198,6 +200,7 @@ export default {
           swal.fire("已取消！", "你的資料依然保存 :)", "error");
         }
       });
+      storage.set("todoList", this.todoList);
     }
   },
   computed: {
@@ -227,6 +230,12 @@ export default {
       return this.todoList.filter(function(item) {
         return !item.completed;
       }).length;
+    }
+  },
+  mounted() {
+    const todoList = storage.get("todoList");
+    if (todoList) {
+      this.todoList = todoList;
     }
   }
 };
