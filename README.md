@@ -2,12 +2,16 @@
 
 ![image](https://github.com/Kuaruou/Vue-TodoList/blob/master/TodoList.gif)
 
-*簡略說明
+**簡略說明
 
 1. 使用Vue-Cli建立專案。
 2. 裝置VueSweetalert2套件在按下全部清除按鈕後提示使用人做確認，避免誤觸使得資料被清空。
 3. 將資料寫入LocalStorage之中避免資料在重新整理或重新開啟後流失。
 
+**Vue
+
+1. addTodo: 宣告newTodo作為新增資料的變數以儲存新增的值，且用timestamp作為id，預設completed為false未完成。
+2. 
 
 ## Project setup
 ```
