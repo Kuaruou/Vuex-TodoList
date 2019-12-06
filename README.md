@@ -2,8 +2,11 @@
 
 ![image](https://github.com/Kuaruou/Vue-TodoList/blob/master/TodoList.gif)
 
+*簡略說明
+
 1. 使用Vue-Cli建立專案。
 2. 裝置VueSweetalert2套件在按下清除按鈕後提示使用人做確認。
+3. 將資料寫入LocalStorage之中避免資料在重新整理後流失。
 
 ## Project setup
 ```
