@@ -8,6 +8,8 @@
 2. 裝置VueSweetalert2套件在按下全部清除按鈕後提示使用人做確認，避免誤觸使得資料被清空。
 3. 將資料寫入LocalStorage之中避免資料在重新整理或重新開啟後流失。
 
+# 安裝
+
 ## Project setup
 ```
 npm install
