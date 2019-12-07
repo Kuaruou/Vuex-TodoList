@@ -12,6 +12,21 @@
 
 *Vue
 
+addTodo: function() {
+      const value = this.newTodo.trim();
+      const timestamp = Math.floor(Date.now());
+      if (!value) {
+        return;
+      }
+      this.todoList.push({
+        id: timestamp,
+        title: value,
+        completed: false
+      });
+      this.newTodo = "";
+      storage.set("todoList", this.todoList);
+    },
+    
 1. addTodo: 宣告newTodo作為新增資料的變數以儲存新增的值，且用timestamp作為id，預設completed為false未完成。且以trim()和if(!value)刪去多餘空格和避免未填寫而儲存空的值。
 
 2. removeTodo: 將todo(陣列的索引位置)在刪除時回傳至function，使用findIndex回傳(todo.id === item.id)的結果，用splice(newIndex, 1)帶入key刪除陣列上目標存在位置的一筆資料。
