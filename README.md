@@ -11,7 +11,7 @@
 3. 將資料寫入LocalStorage之中避免資料在重新整理或重新開啟後流失。
 
 *Vue
-<pre class="prettyprint hljs sql">
+<pre class="prettyprint linenums">
 addTodo: function() {
       const value = this.newTodo.trim();
       const timestamp = Math.floor(Date.now());
