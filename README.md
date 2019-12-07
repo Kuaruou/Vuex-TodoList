@@ -12,7 +12,7 @@
 
 *Vue
 <pre>
-<code class="prettyprint linenums">
+<code class="prettyprint hljs xml">
 addTodo: function() {
       const value = this.newTodo.trim();
       const timestamp = Math.floor(Date.now());
