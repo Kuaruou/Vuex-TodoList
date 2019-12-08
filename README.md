@@ -11,24 +11,7 @@
 3. 將資料寫入LocalStorage之中避免資料在重新整理或重新開啟後流失。
 
 *Vue
-<pre>
-<code class="prettyprint hljs xml">
-addTodo: function() {
-      const value = this.newTodo.trim();
-      const timestamp = Math.floor(Date.now());
-      if (!value) {
-        return;
-      }
-      this.todoList.push({
-        id: timestamp,
-        title: value,
-        completed: false
-      });
-      this.newTodo = "";
-      storage.set("todoList", this.todoList);
-    },
-</code>    
-</pre>   
+
 ```ruby
 addTodo: function() {
       const value = this.newTodo.trim();
