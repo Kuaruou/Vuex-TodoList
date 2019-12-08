@@ -46,8 +46,8 @@
             <li class="nav-item">
               <a
                 class="nav-link theme-text"
-                :class="{'active': visibility == 'completed'}"
-                @click="visibility = 'completed'"
+                :class="{'active': visibility == 'done'}"
+                @click="visibility = 'done'"
                 href="#"
               >已完成</a>
             </li>
@@ -161,9 +161,6 @@ export default {
       this.todoList.splice(newIndex, 1);
       storage.set("todoList", this.todoList);
     },
-    saveList: function(){
-      storage.set("todoList", this.todoList);
-    },//在checkbox切換時亦可以寫入localstorage
     editTodo: function(item) {
       console.log(item);
       this.cacheTodo = item;
@@ -178,6 +175,9 @@ export default {
       this.cacheTodo = {};
       storage.set("todoList", this.todoList);
     },
+    saveList: function(){
+      storage.set("todoList", this.todoList);
+    },//在checkbox切換時亦可以寫入localstorage
     clearAll: function() {
       const vm = this;
       console.log(this);
@@ -215,7 +215,7 @@ export default {
           }
         });
         return newTodos;
-      } else if (this.visibility == "completed") {
+      } else if (this.visibility == "done") {
         const newTodos = [];
         this.todoList.forEach(function(item) {
           if (item.completed) {
