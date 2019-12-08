@@ -31,6 +31,17 @@ addTodo: function() {
     
 1. addTodo: 宣告newTodo作為新增資料的變數以儲存新增的值，且用timestamp作為id，預設completed為false未完成。且以trim()和if(!value)刪去多餘空格和避免未填寫而儲存空的值。
 
+```ruby
+removeTodo: function(todo) {
+      const vm = this;
+      const newIndex = vm.todoList.findIndex(function(item, key) {
+        return todo.id === item.id;
+      });
+      this.todoList.splice(newIndex, 1);
+      storage.set("todoList", this.todoList);
+    },
+```
+
 2. removeTodo: 將todo(陣列的索引位置)在刪除時回傳至function，使用findIndex回傳(todo.id === item.id)的結果，用splice(newIndex, 1)帶入key刪除陣列上目標存在位置的一筆資料。
 
 3. editTodo: 用dblclick觸發先將原本todo的內容傳進來，先用cacheTodo和cacheTitle將內容暫存，在欲修改處雙擊後出現的input寫入內容。若待辦事項中todos的id不等於cacheTodo的id時(v-if="item.id !== cacheTodo.id")將繼續顯示，相同時則隱藏避免與修改內容處(input)重複。修改完畢後按下enter鍵儲存(觸發doneEdit)，按下esc鍵則取消編輯(觸發cancelEdit)。
