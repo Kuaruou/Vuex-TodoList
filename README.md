@@ -83,6 +83,33 @@ filteredTodos: function() {
 
 5. clearAll: 將todoList設為空陣列即可清除已經儲存的所有內容，配合VueSweetalert2的提示效果避免不小心刪除。
 
+```ruby
+clearAll: function() {
+      const vm = this;
+      console.log(this);
+      vm.$swal({
+        title: "確認刪除?",
+        text: "刪除後檔案將無法恢復!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "是的，請刪除!",
+        cancelButtonText: "不，請不要刪除!"
+      }).then(result => {
+        if (result.value) {
+          swal.fire("已刪除!", "所有紀錄已清除。", "success");
+          vm.todoList = []; 
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === swal.DismissReason.cancel
+        ) {
+          swal.fire("已取消！", "你的資料依然保存 :)", "error");
+        }
+      });
+      storage.set("todoList", this.todoList);
+    }
+```
+
 ## Project setup
 ```
 npm install
