@@ -28,7 +28,23 @@ addTodo: function() {
       storage.set("todoList", this.todoList);
     },
 </code>    
-</pre>    
+</pre>   
+```ruby
+addTodo: function() {
+      const value = this.newTodo.trim();
+      const timestamp = Math.floor(Date.now());
+      if (!value) {
+        return;
+      }
+      this.todoList.push({
+        id: timestamp,
+        title: value,
+        completed: false
+      });
+      this.newTodo = "";
+      storage.set("todoList", this.todoList);
+    },
+```
     
 1. addTodo: 宣告newTodo作為新增資料的變數以儲存新增的值，且用timestamp作為id，預設completed為false未完成。且以trim()和if(!value)刪去多餘空格和避免未填寫而儲存空的值。
 
