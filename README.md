@@ -1,5 +1,4 @@
 # todolist-vue-cli
-https://Kuaruou.github.io/Vue-TodoList/
 
 ![image](https://github.com/Kuaruou/Vue-TodoList/blob/master/TodoList.gif)
 
