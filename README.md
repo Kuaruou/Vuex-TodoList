@@ -1,5 +1,6 @@
 # todolist-vue-cli
-https://Kuaruou.github.io/Vue-TodoList/dist/
+
+https://Kuaruou.github.io/Vue-TodoList/dist/#/
 
 ![image](https://github.com/Kuaruou/Vue-TodoList/blob/master/TodoList.gif)
 
@@ -13,7 +14,7 @@ https://Kuaruou.github.io/Vue-TodoList/dist/
 
 *Vue
     
-1. addTodo: 宣告newTodo作為新增資料的變數以儲存新增的值，且用timestamp作為id，預設completed為false未完成。且以trim()和if(!value)刪去多餘空格和避免未填寫而儲存空的值。
+1. addTodo: 宣告newTodo作為新增資料的變數以儲存新增的值，且用timestamp作為id，預設completed為false未完成。且以trim和if(!value)刪去多餘空格和避免未填寫而儲存空的值。
 
 ```javascript
 addTodo: function() {
