@@ -75,6 +75,24 @@ newTodo(state) {
     // newTodo: state => state.newTodo,
 ```
 
+5. v-model: 因為 Vuex 不能在 Mutation 以外的地方修改 State ，所以也就不能直接使用 v-model 去綁定，一般人會想到其中一個解法是分別給 <input> 用v-bind 綁定 value 和用 v-on 監聽 input 或 change 事件，在事件回調中調用 action 。官方提供另一種可以直接雙向綁定的方法，使用 Compute 的 Getter 與 Setter 去分開處理 v-model 的讀取與賦予， 比上一段更簡潔好用。
+
+```javascript
+newTodo: {
+      get () {
+        return this.$store.state.newTodo;
+      },
+      set (value) {
+        this.$store.commit('UPDATENEWTODO', value)
+      },
+    },
+```
+
+```javascript
+UPDATENEWTODO (state, newTodo) {
+      state.newTodo = newTodo;
+    },
+```
 
 ## Project setup
 ```
