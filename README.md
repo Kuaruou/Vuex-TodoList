@@ -14,7 +14,7 @@
 
 *Vuex
 
-本專案在於練習使用Vuex，直接挪用先前練習的Vue-TodoList改寫，關於各項Vue功能請參考 [[這裡]](https://github.com/Kuaruou/Vue-TodoList)
+本專案在於練習使用Vuex，直接挪用先前練習的Vue-TodoList改寫，關於各項Vue功能請參考 [[這裡]](https://github.com/Kuaruou/Vue-TodoList)。
     
 1. state: 相當於Vue裡面的Data部分，儲存資料原始的狀態。
 
