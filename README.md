@@ -1,6 +1,6 @@
 # todolist-vue-cli
 
-### [[網站連結]](https://kuaruou.github.io/Vue-TodoList/#/) ###
+### [[網站連結]](https://kuaruou.github.io/Vuex-Todo-List/#/) ###
 
 ![image](https://github.com/Kuaruou/Vue-TodoList/blob/master/TodoList.gif)
 
