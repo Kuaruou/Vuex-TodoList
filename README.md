@@ -10,9 +10,11 @@
 
 2. 裝置VueSweetalert2套件在按下全部清除按鈕後提示使用人做確認，避免誤觸使得資料被清空。
 
-3. 將資料寫入LocalStorage之中避免資料在重新整理或重新開啟後流失。
+3. 使用Vuex管理各項資料以及功能。
 
-*Vue
+*Vuex
+
+本專案在於練習使用Vuex，直接挪用先前練習的Vue-TodoList改寫，關於各項Vue功能請參考[[這裡]](https://github.com/Kuaruou/Vue-TodoList)
     
 1. addTodo: 宣告newTodo作為新增資料的變數以儲存新增的值，且用timestamp作為id，預設completed為false未完成。且以trim和if(!value)刪去多餘空格和避免未填寫而儲存空的值。
 
