@@ -16,103 +16,65 @@
 
 本專案在於練習使用Vuex，直接挪用先前練習的Vue-TodoList改寫，關於各項Vue功能請參考[[這裡]](https://github.com/Kuaruou/Vue-TodoList)
     
-1. addTodo: 宣告newTodo作為新增資料的變數以儲存新增的值，且用timestamp作為id，預設completed為false未完成。且以trim和if(!value)刪去多餘空格和避免未填寫而儲存空的值。
+1. state: 相當於Vue裡面的Data部分，儲存資料原始的狀態。
 
 ```javascript
-addTodo: function() {
-      const value = this.newTodo.trim();
+state: {
+    newTodo: "",
+    todoList: [
+      {
+        id: "1",
+        title: "test 1",
+        completed: false
+      },
+      {
+        id: "2",
+        title: "test 2",
+        completed: true
+      },
+    ],
+    cacheTodo: {},
+    cacheTitle: "",
+    visibility: "all"
+  },
+```
+
+2. actions: Vuex中非同步的執行，Action 提交（commit）的是 mutations，而不是直接變更 state。Action 函數接受一個與 store 實例具有相同方法和屬性的 context 物件，因此可以調用 context.commit 提交一個 mutation，或是透過 context.state 或 context.getters 來取得 state 和 getters 。
+
+```javascript
+addTodo(context, status) {
+      context.commit('ADDTODO', status);
+    },
+```
+
+3. mutations: 提交 mutations 是改變 Vuex 中 store 的唯一方式。 mutations 非常類似於組件中的事件（event），每個 mutation 都有一個字串的事件類型 (type) 和一個回調函數 (handler)， handler 就是我們實際進行狀態更改的地方，並且他會接受 state 作為第一個參數。
+
+```javascript
+ADDTODO(state) {
+      const value = state.newTodo.trim();
       const timestamp = Math.floor(Date.now());
       if (!value) {
         return;
       }
-      this.todoList.push({
+      state.todoList.push({
         id: timestamp,
         title: value,
         completed: false
       });
-      this.newTodo = "";
-      storage.set("todoList", this.todoList);
+      state.newTodo = "";
+      // $store.dispatch('saveList');
     },
 ```
 
-2. removeTodo: 將todo(陣列的索引位置)在刪除時回傳至function，使用findIndex回傳(todo.id === item.id)的結果，用splice(newIndex, 1)帶入key刪除陣列上目標存在位置的一筆資料。
+4. getters: 類似組件中的 computed ， getters 的返回值會根據他依賴的關係被緩存起來，只有當他依賴的值發生改變才會重新被計算。
 
 ```javascript
-removeTodo: function(todo) {
-      const vm = this;
-      const newIndex = vm.todoList.findIndex(function(item, key) {
-        return todo.id === item.id;
-      });
-      this.todoList.splice(newIndex, 1);
-      storage.set("todoList", this.todoList);
+newTodo(state) {
+      return state.newTodo;
     },
+    // newTodo: state => state.newTodo,
 ```
 
-3. editTodo: 用dblclick觸發先將原本todo的內容傳進來，先用cacheTodo和cacheTitle將內容暫存，在欲修改處雙擊後出現的input寫入內容。若待辦事項中todos的id不等於cacheTodo的id時(v-if="item.id !== cacheTodo.id")將繼續顯示，相同時則隱藏避免與修改內容處(input)重複。修改完畢後按下enter鍵儲存(觸發doneEdit)，按下esc鍵則取消編輯(觸發cancelEdit)。
-
-```javascript
-editTodo: function(item) {
-      console.log(item);
-      this.cacheTodo = item;
-      this.cacheTitle = item.title;
-    },
-```
-
-4. filterTodos: 利用visibility(all, undone, done)回傳todos的不同內容。all回傳全部資料，undone回傳(!item.completed)未完成資料，done回傳(item.completed)已完成資料。
-
-```javascript
-filteredTodos: function() {
-      if (this.visibility == "all") {
-        return this.todoList;
-      } else if (this.visibility == "undone") {
-        const newTodos = [];
-        this.todoList.forEach(function(item) {
-          if (!item.completed) {
-            newTodos.push(item);
-          }
-        });
-        return newTodos;
-      } else if (this.visibility == "done") {
-        const newTodos = [];
-        this.todoList.forEach(function(item) {
-          if (item.completed) {
-            newTodos.push(item);
-          }
-        });
-        return newTodos;
-      }
-      return [];
-    },
-```
-
-5. clearAll: 將todoList設為空陣列即可清除已經儲存的所有內容，配合VueSweetalert2的提示效果避免不小心刪除。
-
-```javascript
-clearAll: function() {
-      const vm = this;
-      console.log(this);
-      vm.$swal({
-        title: "確認刪除?",
-        text: "刪除後檔案將無法恢復!",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: "是的，請刪除!",
-        cancelButtonText: "不，請不要刪除!"
-      }).then(result => {
-        if (result.value) {
-          swal.fire("已刪除!", "所有紀錄已清除。", "success");
-          vm.todoList = []; 
-        } else if (
-          /* Read more about handling dismissals below */
-          result.dismiss === swal.DismissReason.cancel
-        ) {
-          swal.fire("已取消！", "你的資料依然保存 :)", "error");
-        }
-      });
-      storage.set("todoList", this.todoList);
-    }
-```
 
 ## Project setup
 ```
