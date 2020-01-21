@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="app" class="container">
-      <header class="header">Vue.js Todo-List</header>
+      <header class="header">Vuex Todo-List</header>
 
       <div class="input-group input-height">
         <div class="input-group-prepend">
@@ -58,7 +58,8 @@
             class="list-group-item"
             v-for="(item, key) in filteredTodos"
             @dblclick="editTodo(item)"
-          >
+            :key="key"
+          > 
             <div class="d-flex" v-if="item.id !== cacheTodo.id">
               <div class="form-check">
                 <input
@@ -112,73 +113,21 @@
 <script>
 import VueSweetalert2 from "vue-sweetalert2";
 import swal from "sweetalert2/dist/sweetalert2.all.min.js";
-import storage from "./model/storage.js";
+import storage from "./store/storage.js";
+import { mapGetters, mapActions} from 'vuex';
 
 export default {
   // el: '#app',
   name: "app",
   data() {
     return {
-      newTodo: "",
-      todoList: [
-        {
-          id: "",
-          title: "test 1",
-          completed: false
-        },
-        {
-          id: "",
-          title: "test 2",
-          completed: true
-        }
-      ],
-      cacheTodo: {},
-      cacheTitle: "",
-      visibility: "all"
     };
   },
-
   methods: {
-    addTodo: function() {
-      const value = this.newTodo.trim();
-      const timestamp = Math.floor(Date.now());
-      if (!value) {
-        return;
-      }
-      this.todoList.push({
-        id: timestamp,
-        title: value,
-        completed: false
-      });
-      this.newTodo = "";
-      storage.set("todoList", this.todoList);
-    },
-    removeTodo: function(todo) {
-      const vm = this;
-      const newIndex = vm.todoList.findIndex(function(item, key) {
-        return todo.id === item.id;
-      });
-      this.todoList.splice(newIndex, 1);
-      storage.set("todoList", this.todoList);
-    },
-    editTodo: function(item) {
-      console.log(item);
-      this.cacheTodo = item;
-      this.cacheTitle = item.title;
-    },
-    cancelEdit: function() {
-      this.cacheTodo = {};
-    },
-    doneEdit: function(item) {
-      item.title = this.cacheTitle;
-      this.cacheTitle = "";
-      this.cacheTodo = {};
-      storage.set("todoList", this.todoList);
-    },
     saveList: function(){
       storage.set("todoList", this.todoList);
     },//在checkbox切換時亦可以寫入localstorage
-    clearAll: function() {
+    clearAll() {
       const vm = this;
       console.log(this);
       vm.$swal({
@@ -201,42 +150,49 @@ export default {
         }
       });
       storage.set("todoList", this.todoList);
-    }
+    },
+    ...mapActions(['addTodo', 'removeTodo', 'editTodo', 'cancelEdit', 'doneEdit'])
   },
   computed: {
-    filteredTodos: function() {
-      if (this.visibility == "all") {
-        return this.todoList;
-      } else if (this.visibility == "undone") {
-        const newTodos = [];
-        this.todoList.forEach(function(item) {
-          if (!item.completed) {
-            newTodos.push(item);
-          }
-        });
-        return newTodos;
-      } else if (this.visibility == "done") {
-        const newTodos = [];
-        this.todoList.forEach(function(item) {
-          if (item.completed) {
-            newTodos.push(item);
-          }
-        });
-        return newTodos;
-      }
-      return [];
+    newTodo: {
+      get () {
+        return this.$store.state.newTodo;
+      },
+      set (value) {
+        this.$store.commit('UPDATENEWTODO', value)
+      },
     },
-    undoneNum: function() {
-      return this.todoList.filter(function(item) {
-        return !item.completed;
-      }).length;
-    }
+    todoList: {
+      get () {
+        return this.$store.state.todoList;
+      },
+      set (value) {
+        this.$store.commit('UPDATETODOLIST', value)
+      },
+    },
+    visibility: {
+      get () {
+        return this.$store.state.visibility;
+      },
+      set (value) {
+        this.$store.commit('UPDATEVISIBILITY', value)
+      },
+    },
+    cacheTitle: {
+      get () {
+        return this.$store.state.cacheTitle;
+      },
+      set (value) {
+        this.$store.commit('UPDATECATCHETITLE', value)
+      },
+    },
+    ...mapGetters(['cacheTodo', 'filteredTodos', 'undoneNum']),
   },
   mounted() {
-    const todoList = storage.get("todoList");
-    if (todoList) {
-      this.todoList = todoList;
-    }
+    // const todoList = storage.get("todoList");
+    // if (todoList) {
+    //   this.todoList = todoList;
+    // }
   }
 };
 </script>
