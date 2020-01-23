@@ -12,6 +12,16 @@
 
 3. 使用Vuex管理各項資料以及功能。
 
+*技術
+<p>
+  <code>Vue CLI</code>
+  <code>Vue Router</code>
+  <code>Vuex</code>
+  <code>Bootstrap 4</code>
+  <code>Font Awesome</code>
+  <code>VueSweetalert2</code>
+</p>
+
 *Vuex
 
 本專案在於練習使用Vuex，直接挪用先前練習的Vue-TodoList改寫，關於各項Vue功能請參考 [[這裡]](https://github.com/Kuaruou/Vue-TodoList)。
