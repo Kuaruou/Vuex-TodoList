@@ -6,7 +6,7 @@ import storage from "./storage.js";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  // strict: true,
+  strict: true,
   state: {
     newTodo: "",
     todoList: [
