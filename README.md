@@ -2,7 +2,7 @@
 
 ### [[網站連結]](https://kuaruou.github.io/Vuex-TodoList/#/) ###
 
-![image](https://github.com/Kuaruou/Vue-TodoList/blob/master/TodoList.gif)
+![image](https://github.com/Kuaruou/Vuex-TodoList/blob/master/img/vuex-todo.gif)
 
 *簡略說明
 
