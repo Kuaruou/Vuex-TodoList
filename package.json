@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "acorn": "^7.1.1",
-    "axios": "^0.19.1",
+    "axios": "^0.24.0",
     "minimist": "^1.2.5",
     "serialize-javascript": "^2.1.2",
     "vue": "^2.6.10",
@@ -17,7 +17,7 @@
     "vuex": "^3.1.2"
   },
   "devDependencies": {
-    "@vue/cli-service": "^4.0.0",
+    "@vue/cli-service": "^4.5.15",
     "node-sass": "^4.13.1",
     "sass-loader": "^8.0.0",
     "vue-template-compiler": "^2.6.10"
